@@ -34,34 +34,34 @@ $(wildcard ../makefile.init) \
 $(wildcard ../makefile.targets) \
 
 
-BUILD_ARTIFACT_NAME := STM32G4Deboard_Blinky
+BUILD_ARTIFACT_NAME := STM32G4Devboard_Blinky
 BUILD_ARTIFACT_EXTENSION := elf
 BUILD_ARTIFACT_PREFIX :=
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME)$(if $(BUILD_ARTIFACT_EXTENSION),.$(BUILD_ARTIFACT_EXTENSION),)
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
-STM32G4Deboard_Blinky.elf \
+STM32G4Devboard_Blinky.elf \
 
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
-STM32G4Deboard_Blinky.list \
+STM32G4Devboard_Blinky.list \
 
 OBJCOPY_HEX += \
-STM32G4Deboard_Blinky.hex \
+STM32G4Devboard_Blinky.hex \
 
 
 # All Target
 all: main-build
 
 # Main-build Target
-main-build: STM32G4Deboard_Blinky.elf secondary-outputs
+main-build: STM32G4Devboard_Blinky.elf secondary-outputs
 
 # Tool invocations
-STM32G4Deboard_Blinky.elf: $(OBJS) $(USER_OBJS) ../STM32G431KBTx_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "STM32G4Deboard_Blinky.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"../STM32G431KBTx_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32G4Deboard_Blinky.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+STM32G4Devboard_Blinky.elf: $(OBJS) $(USER_OBJS) ../STM32G431KBTx_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "STM32G4Devboard_Blinky.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"../STM32G431KBTx_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32G4Devboard_Blinky.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -70,19 +70,19 @@ default.size.stdout: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-STM32G4Deboard_Blinky.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "STM32G4Deboard_Blinky.list"
+STM32G4Devboard_Blinky.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "STM32G4Devboard_Blinky.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-STM32G4Deboard_Blinky.hex: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objcopy  -O ihex $(EXECUTABLES) "STM32G4Deboard_Blinky.hex"
+STM32G4Devboard_Blinky.hex: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objcopy  -O ihex $(EXECUTABLES) "STM32G4Devboard_Blinky.hex"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) STM32G4Deboard_Blinky.elf STM32G4Deboard_Blinky.hex STM32G4Deboard_Blinky.list default.size.stdout
+	-$(RM) STM32G4Devboard_Blinky.elf STM32G4Devboard_Blinky.hex STM32G4Devboard_Blinky.list default.size.stdout
 	-@echo ' '
 
 secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST) $(OBJCOPY_HEX)
